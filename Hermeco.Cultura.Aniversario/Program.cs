@@ -24,16 +24,16 @@ namespace Hermeco.Cultura.Aniversario
             string fromEmail = Configuration["FromEmail"].ToString();
             string smtpServer = Configuration["SMTPServer"].ToString();
             string subject = string.Empty;
-            
-
+          
             foreach (wsEmpleados.EmployeeIntranet empleado in response.Result.EmployeeIntranet)
             {
+                Console.WriteLine(String.Format("Aniversario {0}", empleado.FirstName));
                 try
                 {
                     subject = string.Format("¡{0}, Feliz Aniversario!", empleado.FirstName.Trim().Split(' ')[0]);
                     if (!string.IsNullOrEmpty(empleado.EMail))
-                    {                        
-                        Utility.sendEmail(smtpServer, subject, "Email\\Aniversario.html", "", fromEmail, empleado.EMail, "", true, "", null);
+                    {
+                        Utility.sendEmail(smtpServer, subject, "Email\\Aniversario.html", "", fromEmail, empleado.EMail, "", true, "", null);                        
                     }
                 }
                 catch (Exception ex)
